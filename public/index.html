@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edrive - Secure File Sharing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <h1>Edrive</h1>
+                </div>
+                <p class="tagline">Secure, temporary file sharing made simple</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Navigation Tabs -->
+            <nav class="tabs-nav">
+                <button class="tab-btn active" data-tab="upload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Upload Files</span>
+                </button>
+                <button class="tab-btn" data-tab="find">
+                    <i class="fas fa-search"></i>
+                    <span>Find Files</span>
+                </button>
+            </nav>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Upload Tab -->
+                <div id="upload-tab" class="tab-panel active">
+                    <div class="upload-options">
+                        <button class="option-btn active" data-option="single">
+                            <i class="fas fa-file"></i>
+                            Single File
+                        </button>
+                        <button class="option-btn" data-option="multiple">
+                            <i class="fas fa-folder"></i>
+                            Multiple Files
+                        </button>
+                    </div>
+
+                    <!-- Single File Upload -->
+                    <div id="single-upload" class="upload-type active">
+                        <form id="uploadForm" class="upload-form" enctype="multipart/form-data">
+                            <div class="file-drop-zone" id="singleDropZone">
+                                <input type="file" id="fileInput" name="file" class="file-input" hidden>
+                                <div class="drop-content">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <h3>Choose a file to upload</h3>
+                                    <p>Drag & drop or click to browse</p>
+                                    <p class="file-info">Max file size: 100MB</p>
+                                    <button type="button" class="browse-btn primary-btn">
+                                        <i class="fas fa-folder-open"></i>
+                                        Browse Files
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="duration">
+                                        <i class="fas fa-clock"></i>
+                                        File Availability
+                                    </label>
+                                    <select id="duration" name="duration" class="form-select" required>
+                                        <option value="2min">2 Minutes</option>
+                                        <option value="5min">5 Minutes</option>
+                                        <option value="1hr" selected>1 Hour</option>
+                                        <option value="5hr">5 Hours</option>
+                                        <option value="1day">1 Day</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="customCode">
+                                        <i class="fas fa-key"></i>
+                                        Access Code
+                                    </label>
+                                    <input type="text" id="customCode" name="customCode" 
+                                           class="form-input"
+                                           placeholder="Auto-generate if empty" 
+                                           maxlength="10">
+                                    <small>Optional - must be unique if provided</small>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn primary-btn">
+                                <i class="fas fa-upload"></i>
+                                Upload File
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Multiple Files Upload -->
+                    <div id="multiple-upload" class="upload-type">
+                        <form id="uploadFolderForm" class="upload-form" enctype="multipart/form-data">
+                            <div class="file-drop-zone" id="multipleDropZone">
+                                <input type="file" id="filesInput" name="files" multiple class="file-input" hidden>
+                                <div class="drop-content">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-folder-plus"></i>
+                                    </div>
+                                    <h3>Choose multiple files</h3>
+                                    <p>Drag & drop or click to browse</p>
+                                    <p class="file-info">Max 10 files, 100MB each</p>
+                                    <button type="button" class="browse-btn primary-btn">
+                                        <i class="fas fa-folder-open"></i>
+                                        Browse Files
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="selected-files" id="selectedFiles"></div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="folderDuration">
+                                        <i class="fas fa-clock"></i>
+                                        Files Availability
+                                    </label>
+                                    <select id="folderDuration" name="duration" class="form-select" required>
+                                        <option value="2min">2 Minutes</option>
+                                        <option value="5min">5 Minutes</option>
+                                        <option value="1hr" selected>1 Hour</option>
+                                        <option value="5hr">5 Hours</option>
+                                        <option value="1day">1 Day</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="folderCustomCode">
+                                        <i class="fas fa-key"></i>
+                                        Access Code
+                                    </label>
+                                    <input type="text" id="folderCustomCode" name="customCode" 
+                                           class="form-input"
+                                           placeholder="Auto-generate if empty"
+                                           maxlength="10">
+                                    <small>Optional - must be unique if provided</small>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn primary-btn">
+                                <i class="fas fa-upload"></i>
+                                Upload Files
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Find Tab -->
+                <div id="find-tab" class="tab-panel">
+                    <form id="findForm" class="find-form">
+                        <div class="search-section">
+                            <div class="form-group">
+                                <label for="accessCode">
+                                    <i class="fas fa-search"></i>
+                                    Enter Access Code
+                                </label>
+                                <input type="text" id="accessCode" name="accessCode" 
+                                       class="form-input large-input"
+                                       placeholder="e.g., A1B2C3" required
+                                       pattern="[A-Za-z0-9]{1,10}" 
+                                       title="1-10 alphanumeric characters">
+                            </div>
+                            <button type="submit" class="submit-btn primary-btn">
+                                <i class="fas fa-search"></i>
+                                Find Files
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="findResult" class="result-container"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Upload Results -->
+        <div id="uploadResult" class="result-container"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Edrive. Secure file sharing made simple.</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Create .gitignore with Node.js specific ignores
+echo "node_modules/" > .gitignore
+echo ".env" >> .gitignore
+echo "npm-debug.log*" >> .gitignore
+echo "yarn-debug.log*" >> .gitignore
+echo "yarn-error.log*" >> .gitignore
+echo ".DS_Store" >> .gitignore
+echo ".vscode/" >> .gitignore
